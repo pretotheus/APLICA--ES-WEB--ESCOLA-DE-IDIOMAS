@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login do Aluno</title>
+
+    <!-- Referencie o Bootstrap localmente -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.css') }}">
+
+    <!-- Adicione o favicon -->
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon_escola.png') }}">
+
+    <style>
+        body {
+            background-color: #f8f9fa; /* Cor de fundo leve */
+            font-family: 'Arial', sans-serif; /* Fonte padrão */
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh; /* 100% da altura da viewport */
+        }
+
+        h1 {
+            color: #007bff; /* Cor azul Bootstrap */
+            margin-bottom: 20px;
+            font-size: 24px; /* Tamanho do texto aumentado */
+        }
+
+        form {
+            max-width: 300px;
+            width: 100%; /* Preenche 100% da largura do form */
+            background-color: #fff; /* Fundo branco para o formulário */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #007bff; /* Cor azul para os rótulos */
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 12px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: #28a745; /* Cor verde Bootstrap */
+            color: #fff;
+            cursor: pointer;
+            width: 100%; /* Preenche 100% da largura do botão */
+            font-size: 14px; /* Reduzi o tamanho da fonte */
+        }
+
+        input[type="submit"]:hover {
+            background-color: #218838; /* Cor verde mais escura ao passar o mouse */
+        }
+
+        .btn-voltar {
+            margin-top: 15px; /* Adiciona um espaçamento acima do botão Voltar */
+            background-color: #6c757d; /* Cor cinza Bootstrap */
+            color: #fff;
+            cursor: pointer;
+            width: 80%; /* Reduzi a largura do botão Voltar */
+            font-size: 14px; /* Reduzi o tamanho da fonte */
+            align-self: flex-start; /* Alinha o botão à esquerda */
+        }
+
+        .btn-voltar:hover {
+            background-color: #5a6268; /* Cor cinza mais escura ao passar o mouse */
+        }
+    </style>
+</head>
+<body>
+
+    <h1 class="display-3">BEM-VINDO</h1>
+    <h2 class="display-10" > Olá, insira seus dados e realize login. </h2>
+
+
+
+    <form action="/processar-login-aluno" method="post">
+        <label for="cpf">CPF:</label>
+        <input type="text" id="cpf" name="cpf" required>
+        <label for="senha">Senha:</label>
+        <input type="password" id="senha" name="senha" required>
+        <input type="submit" value="Login" class="btn btn-primary">
+    </form>
+
+    
+    <a href="javascript:history.back()" class="btn btn-outline-secondary">Voltar</a>
+
+</body>
+</html>

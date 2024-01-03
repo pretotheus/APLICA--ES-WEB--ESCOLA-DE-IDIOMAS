@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notas do Aluno</title>
+
+    <!-- Referencie o Bootstrap localmente -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.css') }}">
+
+    <!-- Adicione o favicon -->
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon_escola.png') }}">
+
+    <style>
+        body {
+            background-color: #f8f9fa; /* Cor de fundo leve */
+            font-family: 'Arial', sans-serif; /* Fonte padrão */
+            margin: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #007bff; /* Cor azul Bootstrap */
+        }
+
+        p {
+            margin-top: 20px;
+        }
+
+        table {
+            margin: auto;
+            width: 80%; /* Largura da tabela reduzida */
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 8px; /* Reduzi o padding para economizar espaço */
+            text-align: left;
+            border-bottom: 1px solid #dee2e6; /* Cor de linha de grade do Bootstrap */
+        }
+
+        th {
+            background-color: #007bff; /* Cor de fundo azul para cabeçalho de tabela Bootstrap */
+            color: #fff;
+            font-size: 16px; /* Aumentei o tamanho da fonte no cabeçalho */
+        }
+
+        .cpf-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+
+        .cpf-toggle {
+            cursor: pointer;
+            color: #007bff; /* Cor azul para o link de toggle */
+            margin-left: 10px;
+        }
+
+        .btn-ocultar-cpf {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Notas do Aluno</h1>
+
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Escola de idiomas</h5>
+            <p class="card-text">Você está logado com o CPF: <span id="cpf">{{ aluno_cpf }}</span></p>
+            <a href="#" class="card-link" onclick="toggleCPF()">Ocultar CPF</a>
+        </div>
+        <div class="card-header">
+            <p class="card-text">Hoje é <span id="data-hoje"></span></p>
+        </div>
+    </div>
+    
+    <script>
+        // Código JavaScript para exibir a data de hoje
+        document.getElementById("data-hoje").textContent = formatarData(new Date());
+    
+        function formatarData(data) {
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            return data.toLocaleDateString('pt-BR', options);
+        }
+    </script>
+    
+    
+    
+
+    <table class="table table-striped table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Disciplina</th>
+                <th scope="col">Nota</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for nota in notas %}
+                <tr>
+                    <td>{{ nota[0] }}</td>
+                    <td>{{ nota[1] }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+
+    <!-- <button class="btn btn-secondary btn-ocultar-cpf" onclick="toggleCPF()">Ocultar CPF</button> -->
+    <a class="btn btn-secondary" href="javascript:history.back()">Voltar</a>
+
+    <script>
+        function toggleCPF() {
+            var cpfElement = document.getElementById('cpf');
+            cpfElement.style.display = (cpfElement.style.display === 'none' || !cpfElement.style.display) ? 'inline' : 'none';
+        }
+    </script>
+
+</body>
+</html>

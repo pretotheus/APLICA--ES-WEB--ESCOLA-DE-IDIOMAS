@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Notas - Escola Feliz</title>
+
+    <!-- Referencie o Bootstrap localmente -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.css') }}">
+
+    <!-- Adicione o favicon -->
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon_escola.png') }}">
+
+    <style>
+        body {
+            background-color: #f8f9fa; /* Cor de fundo leve */
+            font-family: 'Arial', sans-serif; /* Fonte padrão */
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh; /* 100% da altura da viewport */
+        }
+
+        .alerta-importante {
+            background-color: #dc3545; /* Cor vermelha Bootstrap para alerta */
+            color: #fff;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #007bff; /* Cor azul Bootstrap */
+            margin-bottom: 20px;
+            font-size: 24px; /* Tamanho do texto aumentado */
+        }
+
+        form {
+            max-width: 400px;
+            width: 100%;
+            background-color: #fff; /* Fundo branco para o formulário */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #007bff; /* Cor azul para os rótulos */
+        }
+
+        select, input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 12px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: #28a745; /* Cor verde Bootstrap */
+            color: #fff;
+            cursor: pointer;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #218838; /* Cor verde mais escura ao passar o mouse */
+        }
+    </style>
+
+    <script>
+        function confirmarEnvio() {
+            var confirmacao = confirm("Tem certeza de que deseja cadastrar a nota?");
+            if (confirmacao) {
+                document.getElementById("formulario-notas").submit();
+            }
+        }
+    </script>
+</head>
+<body>
+
+    <div class="alerta-importante">
+        <p>Atenção: Antes de atribuir a nota, observe o aluno e a disciplina cuidadosamente.</p>
+    </div>
+
+    <h1>Cadastro de Notas - Escola Feliz</h1>
+
+    <form id="formulario-notas" action="{{ url_for('cadastrar_notas_post') }}" method="post">
+        <label for="aluno">Aluno:</label>
+        <select id="aluno" name="aluno" required>
+            {% for aluno in alunos %}
+                <option value="{{ aluno[1] }}">{{ aluno[1] }} - {{ aluno[0] }}</option>
+            {% endfor %}
+        </select>
+
+        <br>
+        <label for="disciplina">Disciplina:</label>
+        <select id="disciplina" name="disciplina" required>
+            {% for disciplina in disciplinas %}
+                <option value="{{ disciplina[1] }}">{{ disciplina[1] }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <label for="nota">Nota:</label>
+        <input type="text" id="nota" name="nota" required>
+        <br>
+        <input type="button" value="Cadastrar" onclick="confirmarEnvio()">
+    </form>
+
+    <a class="btn btn-secondary" href="javascript:history.back()">Voltar</a>
+
+</body>
+</html>

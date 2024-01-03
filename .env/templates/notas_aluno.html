@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notas do Aluno</title>
+
+    <!-- Referencie o Bootstrap localmente -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.css') }}">
+
+    <!-- Adicione o favicon -->
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon_escola.png') }}">
+
+    <style>
+        body {
+            background-color: #f8f9fa; /* Cor de fundo leve */
+            font-family: 'Arial', sans-serif; /* Fonte padrão */
+            margin: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh; /* 100% da altura da viewport */
+        }
+
+        h1 {
+            color: #007bff; /* Cor azul Bootstrap */
+            margin-bottom: 20px;
+            font-size: 24px; /* Tamanho do texto aumentado */
+            text-align: center;
+        }
+
+        form {
+            max-width: 400px;
+            width: 100%;
+            background-color: #fff; /* Fundo branco para o formulário */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease; /* Adiciona uma transição suave à escala do formulário */
+            animation: fadeIn 0.5s ease; /* Adiciona uma animação de fade-in */
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        form:hover {
+            transform: scale(1.02); /* Efeito de escala ao passar o mouse sobre o formulário */
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #343a40; /* Cor de texto escura Bootstrap */
+            font-weight: bold;
+            transition: color 0.3s ease; /* Adiciona uma transição suave à cor do texto */
+        }
+
+        select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+            border: 1px solid #ced4da; /* Cor de borda Bootstrap */
+            border-radius: 4px;
+            transition: border-color 0.3s ease; /* Adiciona uma transição suave à cor da borda */
+        }
+
+        select:focus {
+            border-color: #007bff; /* Cor azul Bootstrap quando o elemento está focado */
+        }
+
+        input[type="submit"] {
+            background-color: #007bff; /* Cor azul Bootstrap para botões */
+            color: #fff; /* Cor de texto branca para botões */
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease; /* Adiciona uma transição suave à cor de fundo do botão */
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3; /* Cor azul mais escura no hover */
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Notas do Aluno</h1>
+
+    <form action="{{ url_for('exibir_notas') }}" method="get">
+        <label for="aluno">Selecione o Aluno:</label>
+        <select id="aluno" name="aluno" required>
+            {% for aluno in alunos %}
+                <option value="{{ aluno[0] }}">{{ aluno[1] }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <input type="submit" value="Exibir Notas">
+    </form>
+    <a class="btn btn-secondary" href="javascript:history.back()">Voltar</a>
+</body>
+</html>
